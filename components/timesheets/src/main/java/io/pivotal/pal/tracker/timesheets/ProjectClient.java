@@ -10,7 +10,6 @@ public class ProjectClient {
 
     private final RestOperations restOperations;
     private final String endpoint;
-
     private final Map<Long, ProjectInfo> projectsCache = new ConcurrentHashMap<Long, ProjectInfo>();
 
     public ProjectClient(RestOperations restOperations, String registrationServerEndpoint) {
