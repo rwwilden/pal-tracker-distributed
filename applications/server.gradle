@@ -20,14 +20,20 @@ dependencies {
     compile "org.springframework.boot:spring-boot-starter-actuator"
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
 
+    // Circuit breaker (Hystrix)
     compile "io.pivotal.spring.cloud:spring-cloud-services-starter-circuit-breaker"
 
+    // OAuth security
     compile "org.springframework.cloud:spring-cloud-starter-oauth2"
     compile "io.pivotal.spring.cloud:spring-cloud-sso-connector:$springCloudSsoVersion"
 
+    // Zipkin
     compile "org.springframework.cloud:spring-cloud-starter-sleuth"
     compile "org.springframework.cloud:spring-cloud-sleuth-stream"
     compile "org.springframework.cloud:spring-cloud-starter-stream-rabbit"
+
+    // Config server
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-config-client"
 
     testCompile project(":components:test-support")
 }
@@ -37,5 +43,10 @@ bootRun.environment([
         "SECURITY_OAUTH2_CLIENT_CLIENT_ID": "tracker-client",
         "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": "supersecret",
         "SECURITY_USER_NAME": "actuator",
-        "SECURITY_USER_PASSWORD": "operations4red"
+        "SECURITY_USER_PASSWORD": "operations4red",
+        "REGISTRATION_SERVER_ENDPOINT": "http://registration-server"
+])
+
+test.environment([
+        "REGISTRATION_SERVER_ENDPOINT": "http://registration-server"
 ])
